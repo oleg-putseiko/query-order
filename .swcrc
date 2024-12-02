@@ -1,0 +1,23 @@
+{
+  "$schema": "https://swc.rs/schema.json",
+  "exclude": [".*/definitions/.*\\.ts$", ".*/types/.*\\.ts$"],
+  "jsc": {
+    "baseUrl": "./",
+    "parser": {
+      "syntax": "typescript",
+      "tsx": true
+    },
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "target": "es2015",
+    "transform": {
+      "react": {
+        "runtime": "automatic"
+      }
+    }
+  },
+  "module": {
+    "type": "es6"
+  }
+}

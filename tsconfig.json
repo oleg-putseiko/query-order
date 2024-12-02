@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "module": "ES6",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "strict": true,
+    "stripInternal": true,
+    "target": "ES6"
+  },
+  "exclude": ["dist", "node_modules"],
+  "include": ["src/**/*.ts"]
+}

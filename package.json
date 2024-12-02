@@ -1,0 +1,54 @@
+{
+  "name": "query-order",
+  "version": "1.0.0-canary.0",
+  "description": "",
+  "license": "MIT",
+  "author": "Oleg Putseiko <oleg.putseiko@gmail.com> (https://github.com/oleg-putseiko)",
+  "keywords": [],
+  "homepage": "https://github.com/oleg-putseiko/query-order",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oleg-putseiko/query-order"
+  },
+  "bugs": {
+    "url": "https://github.com/oleg-putseiko/query-order/issues"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist/index.d.ts",
+    "dist/index.js"
+  ],
+  "exports": "./dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier -c .",
+    "format:fix": "prettier -w .",
+    "lint": "eslint ./src/**/*.{js,ts,tsx,json}",
+    "lint:fix": "eslint ./src/**/*.{js,ts,tsx,json} --fix && yarn format:fix",
+    "lint:strict": "eslint ./src/**/*.{js,ts,tsx,json} --max-warnings=0 && yarn format",
+    "prepare": "husky install | chmod +x ./.husky/*",
+    "typecheck": "tsc --noEmit --incremental false"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^18.2.0",
+    "@commitlint/config-conventional": "^18.1.0",
+    "@typescript-eslint/eslint-plugin": "^6.9.1",
+    "@typescript-eslint/parser": "^6.9.1",
+    "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-woofmeow": "^1.0.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
+    "prettier": "^3.0.3",
+    "typescript": "~5.2.2"
+  },
+  "engines": {
+    "node": ">=18.18.0",
+    "yarn": "^3.6.4"
+  },
+  "volta": {
+    "node": "18.18.0",
+    "yarn": "3.6.4"
+  },
+  "packageManager": "yarn@3.6.4"
+}
