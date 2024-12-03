@@ -25,7 +25,20 @@ type QueryOrderConfig = {
 type QueryFunction = () => unknown | Promise<unknown>;
 
 type Query = {
+  /**
+   * A query function executed in an order.
+   */
   func: QueryFunction;
+
+  /**
+   * Determines whether to yield to the main thread after completing a query.
+   * Does not apply to the last query in the order.
+   *
+   * If not defined, the value of the `shouldYieldAfterEach` property from the order configuration
+   * will be taken into account instead.
+   *
+   * @default undefined
+   */
   shouldYieldAfter?: boolean;
 };
 
