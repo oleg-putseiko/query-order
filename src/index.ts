@@ -70,6 +70,12 @@ export class QueryOrder {
     };
   }
 
+  /**
+   * Adds one or more queries to the queue in the order in which they are passed.
+   *
+   * @param queries list of queries added to the queue.
+   * @returns current instance of the class.
+   */
   add(...queries: NonEmptyArray<QueryFunction | Query>): QueryOrder {
     if (this._queries.length + queries.length > this._config.max) {
       this._removeFirstInactiveQueries(
@@ -87,6 +93,12 @@ export class QueryOrder {
     return this;
   }
 
+  /**
+   * Starts a queue of added queries.
+   *
+   * While this method is running, queries can still be added to the queue,
+   * except that an active one cannot be removed from it.
+   */
   async start(): Promise<void> {
     const query = this._queries[0];
 
