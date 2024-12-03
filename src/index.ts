@@ -17,7 +17,7 @@ export type QueryOrderConfig = {
   /**
    * Determines whether to yield to the main thread after completing each query except the last one.
    *
-   * @default false
+   * @default true
    */
   shouldYieldAfterEach?: boolean;
 };
@@ -65,7 +65,7 @@ export class QueryOrder {
   constructor(config?: Some<QueryOrderConfig>) {
     this._config = {
       max: Infinity,
-      shouldYieldAfterEach: false,
+      shouldYieldAfterEach: true,
       ...config,
     };
   }
