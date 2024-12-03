@@ -1,7 +1,10 @@
+type Some<T, K extends keyof T = keyof T> = Partial<T> &
+  { [X in K]: Required<Pick<T, X>> }[K];
+
 type NonEmptyArray<I> = [I, ...I[]];
 
 type QueryOrderConfig = {
-  max: number;
+  max?: number;
   shouldYieldAfterEach?: boolean;
 };
 
@@ -29,11 +32,15 @@ const ensurePromise = (func: QueryFunction) => {
 };
 
 export class QueryOrder {
-  protected readonly _config: QueryOrderConfig;
+  protected readonly _config: Required<QueryOrderConfig>;
   protected readonly _queries: OrderedQuery[] = [];
 
-  constructor(config?: QueryOrderConfig) {
-    this._config = { max: Infinity, ...config };
+  constructor(config?: Some<QueryOrderConfig>) {
+    this._config = {
+      max: Infinity,
+      shouldYieldAfterEach: false,
+      ...config,
+    };
   }
 
   add(...queries: NonEmptyArray<QueryFunction | Query>): QueryOrder {
