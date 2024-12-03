@@ -3,7 +3,7 @@ type Some<T, K extends keyof T = keyof T> = Partial<T> &
 
 type NonEmptyArray<I> = [I, ...I[]];
 
-type QueryOrderConfig = {
+export type QueryOrderConfig = {
   /**
    * Determines the maximum number of queries in the queue.
    *
@@ -22,9 +22,9 @@ type QueryOrderConfig = {
   shouldYieldAfterEach?: boolean;
 };
 
-type QueryFunction = () => unknown | Promise<unknown>;
+export type QueryFunction = () => unknown | Promise<unknown>;
 
-type Query = {
+export type Query = {
   /**
    * A query function executed in an order.
    */
@@ -129,3 +129,6 @@ export class QueryOrder {
     }
   }
 }
+
+// eslint-disable-next-line no-restricted-exports
+export default QueryOrder;
