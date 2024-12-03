@@ -29,8 +29,8 @@ const ensurePromise = (func: QueryFunction) => {
 };
 
 export class QueryOrder {
-  protected _config: QueryOrderConfig;
-  protected _queries: OrderedQuery[] = [];
+  protected readonly _config: QueryOrderConfig;
+  protected readonly _queries: OrderedQuery[] = [];
 
   constructor(config?: QueryOrderConfig) {
     this._config = { max: Infinity, ...config };
@@ -53,28 +53,24 @@ export class QueryOrder {
     return this;
   }
 
-  start(): Promise<void> {
+  async start(): Promise<void> {
     const query = this._queries[0];
 
     if (query !== undefined && !query.isPending) {
       query.isPending = true;
 
-      return ensurePromise(query.func)
-        .finally(() => {
-          this._queries.shift();
+      await ensurePromise(query.func).finally(() => {
+        this._queries.shift();
 
-          if (this._queries.length <= 0) return;
+        if (this._queries.length <= 0) return;
 
-          if (query.shouldYieldAfter ?? this._config.shouldYieldAfterEach) {
-            yieldToMainThread();
-          }
+        if (query.shouldYieldAfter ?? this._config.shouldYieldAfterEach) {
+          yieldToMainThread();
+        }
 
-          return this.start();
-        })
-        .then();
+        return this.start();
+      });
     }
-
-    return Promise.resolve();
   }
 
   protected _removeFirstInactiveQueries(count: number): void {
