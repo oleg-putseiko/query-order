@@ -4,7 +4,21 @@ type Some<T, K extends keyof T = keyof T> = Partial<T> &
 type NonEmptyArray<I> = [I, ...I[]];
 
 type QueryOrderConfig = {
+  /**
+   * Determines the maximum number of queries in the queue.
+   *
+   * When adding queries in excess of the limit, those that were previously added
+   * will be removed from the queue in FIFO order.
+   *
+   * @default Infinite
+   */
   max?: number;
+
+  /**
+   * Determines whether to yield to the main thread after completing each query except the last one.
+   *
+   * @default false
+   */
   shouldYieldAfterEach?: boolean;
 };
 
